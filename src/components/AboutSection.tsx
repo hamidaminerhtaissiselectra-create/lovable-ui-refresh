@@ -1,38 +1,62 @@
 import { motion } from "framer-motion";
-import { CheckCircle2 } from "lucide-react";
+import { CheckCircle2, Award, Users, Clock, ShieldCheck, Hammer, HeartHandshake } from "lucide-react";
 
 const points = [
-  "Plus de 10 ans d'expérience dans la réparation de volets",
-  "Intervention rapide en Île-de-France et partout en France",
-  "Artisan certifié RGE et Qualibat",
-  "Garantie décennale sur toutes nos installations",
-  "Devis gratuit et transparent, sans engagement",
-  "Service après-vente réactif et disponible",
+  { icon: Award, text: "Plus de 10 ans d'expérience en volets roulants" },
+  { icon: Clock, text: "Intervention rapide sous 24-48h en Île-de-France" },
+  { icon: ShieldCheck, text: "Artisan certifié RGE et Qualibat" },
+  { icon: Hammer, text: "Garantie décennale sur toutes nos installations" },
+  { icon: HeartHandshake, text: "Devis gratuit et transparent, sans engagement" },
+  { icon: Users, text: "Service après-vente réactif et disponible 7j/7" },
+];
+
+const certifications = [
+  "Certification RGE",
+  "Qualibat",
+  "Garantie décennale",
+  "Assurance décennale",
 ];
 
 const AboutSection = () => (
   <section id="apropos" className="py-20">
     <div className="container mx-auto px-4">
+      <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center max-w-2xl mx-auto mb-14">
+        <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-600 text-sm font-semibold border border-emerald-500/20 mb-4">Notre Mission</span>
+        <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mt-2 mb-4">
+          Répar'Action Volets : Votre Partenaire de Confiance
+        </h2>
+        <p className="text-muted-foreground leading-relaxed">
+          Depuis plus de 10 ans, Répar'Action Volets accompagne les particuliers et les professionnels dans la réparation et l'installation de volets roulants. Notre mission est simple : rendre votre habitat plus sûr, plus confortable et mieux isolé.
+        </p>
+      </motion.div>
+
       <div className="grid lg:grid-cols-2 gap-12 items-center">
         <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
-          <span className="text-accent font-semibold text-sm uppercase tracking-wider">À propos</span>
-          <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mt-2 mb-6">
-            Votre expert en volets roulants depuis plus de 10 ans
-          </h2>
           <p className="text-muted-foreground mb-8 leading-relaxed">
-            Basée à Fontenay-Trésigny (77), Répar'Action Volets est une entreprise spécialisée dans la réparation, l'installation et la motorisation de volets roulants. Notre équipe d'artisans qualifiés intervient rapidement sur toute l'Île-de-France pour garantir votre confort et votre sécurité.
+            Basée à Fontenay-Trésigny (77), notre entreprise s'appuie sur trois piliers fondamentaux : des <strong className="text-foreground">équipements de qualité</strong> issus des meilleures marques du marché, une <strong className="text-foreground">installation professionnelle</strong> réalisée par des artisans certifiés, et un <strong className="text-foreground">service après-vente réactif</strong> disponible 7 jours sur 7.
           </p>
-          <div className="grid sm:grid-cols-2 gap-4">
+          <div className="grid sm:grid-cols-2 gap-4 mb-8">
             {points.map((p) => (
-              <div key={p} className="flex items-start gap-3">
-                <CheckCircle2 className="h-5 w-5 text-accent mt-0.5 shrink-0" />
-                <span className="text-sm text-foreground">{p}</span>
+              <div key={p.text} className="flex items-start gap-3 p-3 rounded-lg hover:bg-muted/50 transition-colors">
+                <div className="w-8 h-8 rounded-lg bg-accent/10 flex items-center justify-center shrink-0">
+                  <p.icon className="h-4 w-4 text-accent" />
+                </div>
+                <span className="text-sm text-foreground">{p.text}</span>
               </div>
+            ))}
+          </div>
+
+          {/* Certifications */}
+          <div className="flex flex-wrap gap-2">
+            {certifications.map((c) => (
+              <span key={c} className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium bg-primary/10 text-primary border border-primary/20">
+                <CheckCircle2 className="h-3 w-3" /> {c}
+              </span>
             ))}
           </div>
         </motion.div>
 
-        <motion.div initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="relative">
+        <motion.div initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="space-y-6">
           <div className="bg-hero-gradient rounded-2xl p-8 text-primary-foreground">
             <h3 className="font-display text-2xl font-bold mb-6">Répar'Action Volets en chiffres</h3>
             <div className="grid grid-cols-2 gap-6">
@@ -48,6 +72,20 @@ const AboutSection = () => (
                 </div>
               ))}
             </div>
+          </div>
+
+          <div className="grid grid-cols-2 gap-4">
+            {[
+              { label: "Matériel certifié", desc: "Marques premium" },
+              { label: "Techniciens certifiés", desc: "Formation continue" },
+              { label: "Garantie décennale", desc: "Pièces et main d'œuvre" },
+              { label: "Support 7j/7", desc: "Assistance téléphonique" },
+            ].map((item) => (
+              <div key={item.label} className="bg-card rounded-lg p-4 border border-border card-shadow text-center">
+                <div className="font-semibold text-foreground text-sm">{item.label}</div>
+                <div className="text-xs text-muted-foreground mt-0.5">{item.desc}</div>
+              </div>
+            ))}
           </div>
         </motion.div>
       </div>
