@@ -1,30 +1,43 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
-import { Wrench, RefreshCcw, GlassWater, Cpu, LayoutGrid, AlertTriangle, ArrowRight, ArrowLeft, CheckCircle2, ClipboardList, Settings, User } from "lucide-react";
+import { Wrench, RefreshCcw, GlassWater, Cpu, LayoutGrid, AlertTriangle, ArrowRight, ArrowLeft, CheckCircle2, User, ClipboardList, Settings, HelpCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 
-const services = [
-  { id: "reparation", icon: Wrench, label: "Réparation de volets", color: "border-accent bg-accent/5 text-accent" },
-  { id: "remplacement", icon: RefreshCcw, label: "Remplacement de volets", color: "border-primary bg-primary/5 text-primary" },
-  { id: "vitrerie", icon: GlassWater, label: "Vitrerie & Vitrage", color: "border-emerald-500 bg-emerald-500/5 text-emerald-600" },
-  { id: "motorisation", icon: Cpu, label: "Motorisation & Domotique", color: "border-violet-500 bg-violet-500/5 text-violet-600" },
-  { id: "installation", icon: LayoutGrid, label: "Installation complète", color: "border-amber-500 bg-amber-500/5 text-amber-600" },
-  { id: "urgence", icon: AlertTriangle, label: "Dépannage urgent", color: "border-destructive bg-destructive/5 text-destructive" },
-];
+type FormMode = "devis" | "intervention";
+
+const servicesByMode: Record<FormMode, { id: string; icon: React.ElementType; label: string; iconBg: string; borderColor: string }[]> = {
+  devis: [
+    { id: "reparation", icon: Wrench, label: "Réparation de volets", iconBg: "bg-blue-500", borderColor: "border-blue-300" },
+    { id: "remplacement", icon: RefreshCcw, label: "Remplacement de volets", iconBg: "bg-rose-500", borderColor: "border-rose-300" },
+    { id: "vitrerie", icon: GlassWater, label: "Vitrerie & Vitrage", iconBg: "bg-emerald-500", borderColor: "border-emerald-300" },
+    { id: "motorisation", icon: Cpu, label: "Motorisation & Domotique", iconBg: "bg-violet-500", borderColor: "border-violet-300" },
+    { id: "installation", icon: LayoutGrid, label: "Installation complète", iconBg: "bg-cyan-500", borderColor: "border-cyan-300" },
+    { id: "autre", icon: HelpCircle, label: "Autre demande", iconBg: "bg-gray-500", borderColor: "border-gray-300" },
+  ],
+  intervention: [
+    { id: "panne-volet", icon: Wrench, label: "Volet bloqué / en panne", iconBg: "bg-blue-500", borderColor: "border-blue-300" },
+    { id: "vitre-cassee", icon: GlassWater, label: "Vitre cassée", iconBg: "bg-rose-500", borderColor: "border-rose-300" },
+    { id: "urgence", icon: AlertTriangle, label: "Dépannage urgent", iconBg: "bg-orange-500", borderColor: "border-orange-300" },
+    { id: "motorisation-hs", icon: Cpu, label: "Motorisation HS", iconBg: "bg-violet-500", borderColor: "border-violet-300" },
+    { id: "maintenance", icon: Settings, label: "Maintenance / Entretien", iconBg: "bg-emerald-500", borderColor: "border-emerald-300" },
+    { id: "autre-intervention", icon: HelpCircle, label: "Autre intervention", iconBg: "bg-gray-500", borderColor: "border-gray-300" },
+  ],
+};
 
 const urgencyOptions = [
-  { id: "normal", label: "Sous 1 semaine", desc: "Planification classique" },
-  { id: "rapide", label: "Sous 48h", desc: "Intervention rapide" },
-  { id: "urgent", label: "Aujourd'hui / Demain", desc: "Urgence immédiate" },
+  { id: "normal", label: "Sous 1 semaine", desc: "Planification classique", color: "border-emerald-300 text-emerald-600" },
+  { id: "rapide", label: "Sous 48h", desc: "Intervention rapide", color: "border-orange-300 text-orange-600" },
+  { id: "urgent", label: "Aujourd'hui / Demain", desc: "Urgence immédiate", color: "border-rose-300 text-rose-600" },
 ];
 
 const QuoteFormSection = () => {
   const { toast } = useToast();
+  const [mode, setMode] = useState<FormMode>("devis");
   const [step, setStep] = useState(1);
-  const [selectedServices, setSelectedServices] = useState<string[]>([]);
+  const [selectedService, setSelectedService] = useState("");
   const [urgency, setUrgency] = useState("");
   const [details, setDetails] = useState("");
   const [name, setName] = useState("");
@@ -33,12 +46,24 @@ const QuoteFormSection = () => {
   const [city, setCity] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const toggleService = (id: string) => {
-    setSelectedServices((prev) => prev.includes(id) ? prev.filter((s) => s !== id) : [...prev, id]);
+  const resetForm = () => {
+    setStep(1);
+    setSelectedService("");
+    setUrgency("");
+    setDetails("");
+    setName("");
+    setPhone("");
+    setEmail("");
+    setCity("");
+  };
+
+  const switchMode = (m: FormMode) => {
+    setMode(m);
+    resetForm();
   };
 
   const canNext = () => {
-    if (step === 1) return selectedServices.length > 0;
+    if (step === 1) return selectedService !== "";
     if (step === 2) return urgency !== "";
     if (step === 3) return name && phone && email;
     return false;
@@ -48,164 +73,203 @@ const QuoteFormSection = () => {
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
-      toast({ title: "✅ Demande envoyée !", description: "Nous vous recontactons sous 24h avec votre devis personnalisé." });
-      setStep(1);
-      setSelectedServices([]);
-      setUrgency("");
-      setDetails("");
-      setName("");
-      setPhone("");
-      setEmail("");
-      setCity("");
+      toast({
+        title: "✅ Demande envoyée !",
+        description: mode === "devis"
+          ? "Nous vous recontactons sous 24h avec votre devis personnalisé."
+          : "Un technicien vous contactera très rapidement pour planifier l'intervention.",
+      });
+      resetForm();
     }, 1200);
   };
 
-  const steps = [
-    { num: 1, label: "Service", icon: ClipboardList },
-    { num: 2, label: "Détails", icon: Settings },
-    { num: 3, label: "Contact", icon: User },
-  ];
+  const currentServices = servicesByMode[mode];
 
   return (
-    <section id="devis" className="py-20 bg-section-gradient">
+    <section id="devis" className="py-20 bg-gradient-to-b from-background to-muted/30">
       <div className="container mx-auto px-4">
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center max-w-2xl mx-auto mb-10">
-          <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent/10 text-accent text-sm font-semibold border border-accent/20 mb-4">
-            Devis Gratuit en 2 minutes
+          <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-accent/10 text-accent text-sm font-semibold border border-accent/20 mb-4">
+            ⚡ Réponse en moins de 24h
           </span>
           <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mt-2 mb-4">
-            Obtenez votre devis personnalisé
+            Comment pouvons-nous vous aider ?
           </h2>
-          <p className="text-muted-foreground">Répondez à quelques questions pour recevoir une estimation adaptée à vos besoins.</p>
+          <p className="text-muted-foreground text-lg">Choisissez votre type de demande et répondez à quelques questions.</p>
         </motion.div>
 
-        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="max-w-2xl mx-auto">
-          {/* Progress steps */}
-          <div className="flex items-center justify-center gap-2 mb-8">
-            {steps.map((s, i) => (
-              <div key={s.num} className="flex items-center gap-2">
-                <div className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium transition-all ${step >= s.num ? "bg-accent text-accent-foreground" : "bg-muted text-muted-foreground"}`}>
-                  {step > s.num ? <CheckCircle2 className="h-4 w-4" /> : <s.icon className="h-4 w-4" />}
-                  <span className="hidden sm:inline">{s.label}</span>
-                  <span className="sm:hidden">{s.num}</span>
+        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="max-w-3xl mx-auto">
+          {/* Top blue accent bar */}
+          <div className="h-1.5 bg-gradient-to-r from-blue-500 via-accent to-blue-400 rounded-t-2xl" />
+
+          <div className="bg-card rounded-b-2xl shadow-2xl border border-border/50 overflow-hidden">
+            {/* Mode tabs */}
+            <div className="flex justify-center gap-3 pt-8 pb-4 px-6">
+              <button
+                onClick={() => switchMode("devis")}
+                className={`flex items-center gap-2 px-6 py-3 rounded-full text-sm font-bold transition-all ${
+                  mode === "devis"
+                    ? "bg-accent text-white shadow-lg shadow-accent/30"
+                    : "bg-muted text-muted-foreground hover:bg-muted/80"
+                }`}
+              >
+                📋 Demande de Devis
+              </button>
+              <button
+                onClick={() => switchMode("intervention")}
+                className={`flex items-center gap-2 px-6 py-3 rounded-full text-sm font-bold transition-all ${
+                  mode === "intervention"
+                    ? "bg-accent text-white shadow-lg shadow-accent/30"
+                    : "bg-muted text-muted-foreground hover:bg-muted/80"
+                }`}
+              >
+                🔧 Demande d'Intervention
+              </button>
+            </div>
+
+            {/* Step indicator */}
+            <div className="flex items-center justify-center gap-0 pb-6">
+              {[1, 2, 3].map((s, i) => (
+                <div key={s} className="flex items-center">
+                  <div className={`w-9 h-9 rounded-full flex items-center justify-center text-sm font-bold transition-all ${
+                    step >= s
+                      ? "bg-accent text-white shadow-md shadow-accent/30"
+                      : "bg-muted text-muted-foreground"
+                  }`}>
+                    {step > s ? <CheckCircle2 className="h-5 w-5" /> : s}
+                  </div>
+                  {i < 2 && (
+                    <div className={`w-16 h-0.5 mx-1 transition-all ${step > s ? "bg-accent" : "bg-border"}`} />
+                  )}
                 </div>
-                {i < steps.length - 1 && <div className={`w-8 h-0.5 ${step > s.num ? "bg-accent" : "bg-border"}`} />}
+              ))}
+            </div>
+
+            {/* Form content */}
+            <div className="px-6 md:px-10 pb-8 min-h-[340px]">
+              <AnimatePresence mode="wait">
+                {step === 1 && (
+                  <motion.div key={`step1-${mode}`} initial={{ opacity: 0, x: 30 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -30 }} transition={{ duration: 0.25 }}>
+                    <h3 className="font-display font-bold text-lg text-foreground mb-1">
+                      {mode === "devis" ? "Quel service souhaitez-vous ?" : "Quel problème rencontrez-vous ?"}
+                    </h3>
+                    <p className="text-sm text-muted-foreground mb-6">Sélectionnez le service qui correspond à votre besoin.</p>
+                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+                      {currentServices.map((s) => {
+                        const selected = selectedService === s.id;
+                        return (
+                          <button
+                            key={s.id}
+                            onClick={() => setSelectedService(s.id)}
+                            className={`group flex flex-col items-center gap-3 p-5 rounded-xl border-2 transition-all duration-200 hover:shadow-md ${
+                              selected
+                                ? `${s.borderColor} bg-white shadow-md scale-[1.02]`
+                                : "border-border/60 bg-background hover:border-muted-foreground/30"
+                            }`}
+                          >
+                            <div className={`w-12 h-12 rounded-xl flex items-center justify-center text-white transition-all ${
+                              selected ? s.iconBg : "bg-muted-foreground/20 group-hover:" + s.iconBg
+                            }`}>
+                              <s.icon className="h-6 w-6" />
+                            </div>
+                            <span className={`text-sm font-medium text-center leading-tight ${selected ? "text-foreground" : "text-muted-foreground"}`}>
+                              {s.label}
+                            </span>
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </motion.div>
+                )}
+
+                {step === 2 && (
+                  <motion.div key="step2" initial={{ opacity: 0, x: 30 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -30 }} transition={{ duration: 0.25 }}>
+                    <h3 className="font-display font-bold text-lg text-foreground mb-1">Précisez votre demande</h3>
+                    <p className="text-sm text-muted-foreground mb-6">
+                      {mode === "devis" ? "Quand souhaitez-vous réaliser ce projet ?" : "Quelle est l'urgence de l'intervention ?"}
+                    </p>
+
+                    <div className="grid grid-cols-3 gap-3 mb-6">
+                      {urgencyOptions.map((o) => {
+                        const selected = urgency === o.id;
+                        return (
+                          <button
+                            key={o.id}
+                            onClick={() => setUrgency(o.id)}
+                            className={`p-4 rounded-xl border-2 text-center transition-all ${
+                              selected ? `${o.color} border-current bg-white shadow-md` : "border-border hover:border-muted-foreground/30"
+                            }`}
+                          >
+                            <div className={`text-sm font-bold ${selected ? "" : "text-foreground"}`}>{o.label}</div>
+                            <div className="text-xs text-muted-foreground mt-1">{o.desc}</div>
+                          </button>
+                        );
+                      })}
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-medium text-foreground mb-1.5">Description (optionnel)</label>
+                      <Textarea value={details} onChange={(e) => setDetails(e.target.value)} placeholder="Décrivez votre situation : type de volet, panne constatée, dimensions..." rows={3} className="bg-background border-border" />
+                    </div>
+                  </motion.div>
+                )}
+
+                {step === 3 && (
+                  <motion.div key="step3" initial={{ opacity: 0, x: 30 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -30 }} transition={{ duration: 0.25 }}>
+                    <h3 className="font-display font-bold text-lg text-foreground mb-1">Vos coordonnées</h3>
+                    <p className="text-sm text-muted-foreground mb-6">Pour vous recontacter avec votre {mode === "devis" ? "devis" : "proposition d'intervention"}.</p>
+
+                    <div className="space-y-4">
+                      <div className="grid sm:grid-cols-2 gap-4">
+                        <div>
+                          <label className="block text-sm font-medium text-foreground mb-1.5">Nom complet *</label>
+                          <Input value={name} onChange={(e) => setName(e.target.value)} required placeholder="Jean Dupont" className="bg-background" />
+                        </div>
+                        <div>
+                          <label className="block text-sm font-medium text-foreground mb-1.5">Téléphone *</label>
+                          <Input value={phone} onChange={(e) => setPhone(e.target.value)} required type="tel" placeholder="06 XX XX XX XX" className="bg-background" />
+                        </div>
+                      </div>
+                      <div className="grid sm:grid-cols-2 gap-4">
+                        <div>
+                          <label className="block text-sm font-medium text-foreground mb-1.5">Email *</label>
+                          <Input value={email} onChange={(e) => setEmail(e.target.value)} required type="email" placeholder="votre@email.com" className="bg-background" />
+                        </div>
+                        <div>
+                          <label className="block text-sm font-medium text-foreground mb-1.5">Ville / Code postal</label>
+                          <Input value={city} onChange={(e) => setCity(e.target.value)} placeholder="Fontenay-Trésigny (77)" className="bg-background" />
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="mt-6 flex flex-wrap items-center gap-3 text-xs text-muted-foreground">
+                      <span className="inline-flex items-center gap-1"><CheckCircle2 className="h-3.5 w-3.5 text-emerald-500" /> Sans engagement</span>
+                      <span className="inline-flex items-center gap-1"><CheckCircle2 className="h-3.5 w-3.5 text-emerald-500" /> Réponse sous 24h</span>
+                      <span className="inline-flex items-center gap-1"><CheckCircle2 className="h-3.5 w-3.5 text-emerald-500" /> Données sécurisées</span>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+
+              {/* Navigation */}
+              <div className="flex justify-between mt-8 pt-6 border-t border-border/50">
+                {step > 1 ? (
+                  <Button variant="ghost" onClick={() => setStep(step - 1)} className="gap-2 text-muted-foreground">
+                    <ArrowLeft className="h-4 w-4" /> Retour
+                  </Button>
+                ) : (
+                  <div />
+                )}
+                {step < 3 ? (
+                  <Button onClick={() => setStep(step + 1)} disabled={!canNext()} className="bg-accent text-white hover:bg-accent/90 gap-2 px-8 rounded-full shadow-lg shadow-accent/20">
+                    Continuer <ArrowRight className="h-4 w-4" />
+                  </Button>
+                ) : (
+                  <Button onClick={handleSubmit} disabled={!canNext() || loading} className="bg-hero-gradient text-white gap-2 font-semibold px-8 rounded-full shadow-lg">
+                    {loading ? "Envoi en cours..." : mode === "devis" ? "Recevoir mon devis gratuit" : "Demander l'intervention"} {!loading && <ArrowRight className="h-4 w-4" />}
+                  </Button>
+                )}
               </div>
-            ))}
-          </div>
-
-          <div className="bg-card rounded-xl p-6 md:p-8 card-shadow border border-border min-h-[320px]">
-            <AnimatePresence mode="wait">
-              {step === 1 && (
-                <motion.div key="step1" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }}>
-                  <h3 className="font-display font-bold text-lg text-foreground mb-1">De quel service avez-vous besoin ?</h3>
-                  <p className="text-sm text-muted-foreground mb-6">Sélectionnez un ou plusieurs services.</p>
-                  <div className="grid sm:grid-cols-2 gap-3">
-                    {services.map((s) => {
-                      const selected = selectedServices.includes(s.id);
-                      return (
-                        <button
-                          key={s.id}
-                          onClick={() => toggleService(s.id)}
-                          className={`flex items-center gap-3 p-4 rounded-lg border-2 text-left transition-all ${selected ? s.color + " border-current" : "border-border hover:border-muted-foreground/30 bg-background"}`}
-                        >
-                          <s.icon className={`h-5 w-5 shrink-0 ${selected ? "" : "text-muted-foreground"}`} />
-                          <span className={`text-sm font-medium ${selected ? "" : "text-foreground"}`}>{s.label}</span>
-                        </button>
-                      );
-                    })}
-                  </div>
-                </motion.div>
-              )}
-
-              {step === 2 && (
-                <motion.div key="step2" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }}>
-                  <h3 className="font-display font-bold text-lg text-foreground mb-1">Détails de votre demande</h3>
-                  <p className="text-sm text-muted-foreground mb-6">Précisez l'urgence et décrivez votre besoin.</p>
-
-                  <div className="mb-6">
-                    <label className="block text-sm font-medium text-foreground mb-3">Urgence de l'intervention</label>
-                    <div className="grid grid-cols-3 gap-3">
-                      {urgencyOptions.map((o) => (
-                        <button
-                          key={o.id}
-                          onClick={() => setUrgency(o.id)}
-                          className={`p-3 rounded-lg border-2 text-center transition-all ${urgency === o.id ? "border-accent bg-accent/5" : "border-border hover:border-muted-foreground/30"}`}
-                        >
-                          <div className={`text-sm font-semibold ${urgency === o.id ? "text-accent" : "text-foreground"}`}>{o.label}</div>
-                          <div className="text-xs text-muted-foreground mt-0.5">{o.desc}</div>
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-medium text-foreground mb-1.5">Description du problème (optionnel)</label>
-                    <Textarea value={details} onChange={(e) => setDetails(e.target.value)} placeholder="Décrivez votre situation : type de volet, panne constatée, dimensions..." rows={4} className="bg-background" />
-                  </div>
-                </motion.div>
-              )}
-
-              {step === 3 && (
-                <motion.div key="step3" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }}>
-                  <h3 className="font-display font-bold text-lg text-foreground mb-1">Vos coordonnées</h3>
-                  <p className="text-sm text-muted-foreground mb-6">Pour vous recontacter avec votre devis personnalisé.</p>
-
-                  <div className="space-y-4">
-                    <div className="grid sm:grid-cols-2 gap-4">
-                      <div>
-                        <label className="block text-sm font-medium text-foreground mb-1.5">Nom complet *</label>
-                        <Input value={name} onChange={(e) => setName(e.target.value)} required placeholder="Jean Dupont" className="bg-background" />
-                      </div>
-                      <div>
-                        <label className="block text-sm font-medium text-foreground mb-1.5">Téléphone *</label>
-                        <Input value={phone} onChange={(e) => setPhone(e.target.value)} required type="tel" placeholder="06 XX XX XX XX" className="bg-background" />
-                      </div>
-                    </div>
-                    <div className="grid sm:grid-cols-2 gap-4">
-                      <div>
-                        <label className="block text-sm font-medium text-foreground mb-1.5">Email *</label>
-                        <Input value={email} onChange={(e) => setEmail(e.target.value)} required type="email" placeholder="votre@email.com" className="bg-background" />
-                      </div>
-                      <div>
-                        <label className="block text-sm font-medium text-foreground mb-1.5">Ville / Code postal</label>
-                        <Input value={city} onChange={(e) => setCity(e.target.value)} placeholder="Fontenay-Trésigny (77)" className="bg-background" />
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="mt-6 flex items-center gap-2 text-xs text-muted-foreground">
-                    <CheckCircle2 className="h-3.5 w-3.5 text-accent" />
-                    Sans engagement
-                    <span className="mx-1">•</span>
-                    <CheckCircle2 className="h-3.5 w-3.5 text-accent" />
-                    Réponse sous 24h
-                    <span className="mx-1">•</span>
-                    <CheckCircle2 className="h-3.5 w-3.5 text-accent" />
-                    Données sécurisées
-                  </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
-
-            {/* Navigation */}
-            <div className="flex justify-between mt-8 pt-6 border-t border-border">
-              {step > 1 ? (
-                <Button variant="ghost" onClick={() => setStep(step - 1)} className="gap-2">
-                  <ArrowLeft className="h-4 w-4" /> Retour
-                </Button>
-              ) : (
-                <div />
-              )}
-              {step < 3 ? (
-                <Button onClick={() => setStep(step + 1)} disabled={!canNext()} className="bg-accent text-accent-foreground hover:bg-accent/90 gap-2">
-                  Continuer <ArrowRight className="h-4 w-4" />
-                </Button>
-              ) : (
-                <Button onClick={handleSubmit} disabled={!canNext() || loading} className="bg-hero-gradient text-primary-foreground gap-2 font-semibold">
-                  {loading ? "Envoi en cours..." : "Envoyer ma demande"} {!loading && <ArrowRight className="h-4 w-4" />}
-                </Button>
-              )}
             </div>
           </div>
         </motion.div>
