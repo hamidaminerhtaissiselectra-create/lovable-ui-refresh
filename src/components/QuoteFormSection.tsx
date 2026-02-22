@@ -86,7 +86,7 @@ const QuoteFormSection = () => {
 
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="max-w-3xl mx-auto">
           {/* Top accent bar */}
-          <div className="h-1.5 bg-gradient-to-r from-service-blue via-accent to-service-orange rounded-t-2xl" />
+          <div className="h-1.5 rounded-t-2xl" style={{ background: "linear-gradient(to right, hsl(var(--service-blue)), hsl(var(--accent)), hsl(var(--service-orange)))" }} />
 
           <div className="bg-card rounded-b-2xl shadow-2xl border border-border/50 overflow-hidden">
             {/* Mode tabs */}
@@ -149,9 +149,9 @@ const QuoteFormSection = () => {
                                 : "border-border/60 bg-background hover:border-muted-foreground/30"
                             }`}
                           >
-                            <div className={`w-12 h-12 rounded-xl flex items-center justify-center text-white transition-all shadow-md ${
-                              selected ? s.iconBg : "bg-muted-foreground/20"
-                            } group-hover:${s.iconBg}`}>
+                            <div className={`w-12 h-12 rounded-xl flex items-center justify-center text-white transition-all shadow-md ${s.iconBg} ${
+                              !selected ? "opacity-40 group-hover:opacity-100" : ""
+                            }`}>
                               <s.icon className="h-6 w-6" />
                             </div>
                             <span className={`text-sm font-medium text-center leading-tight ${selected ? "text-foreground" : "text-muted-foreground"}`}>

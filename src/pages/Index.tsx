@@ -11,7 +11,7 @@ import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
 
 const Index = () => (
-  <main>
+  <main className="relative">
     <Navbar />
     <HeroSection />
     <ServicesSection />

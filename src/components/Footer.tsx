@@ -15,7 +15,7 @@ const Footer = () => (
           <Button asChild className="bg-accent text-accent-foreground hover:bg-accent/90 gap-2">
             <Link to="/#devis">Demander un devis <ArrowRight className="h-4 w-4" /></Link>
           </Button>
-          <Button asChild variant="outline" className="border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10 gap-2">
+          <Button asChild className="border border-primary-foreground/30 bg-transparent text-primary-foreground hover:bg-primary-foreground/10 gap-2">
             <a href="tel:0603205967"><Phone className="h-4 w-4" /> Appeler</a>
           </Button>
         </div>
