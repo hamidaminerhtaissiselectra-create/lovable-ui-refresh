@@ -1,0 +1,13 @@
+{
+  "version": "1.0.0",
+  "project": "renove94000",
+  "settings": {
+    "framework": "vite-react",
+    "language": "typescript",
+    "styling": "tailwind",
+    "deployment": {
+      "autoDeploy": true,
+      "branch": "main"
+    }
+  }
+}
