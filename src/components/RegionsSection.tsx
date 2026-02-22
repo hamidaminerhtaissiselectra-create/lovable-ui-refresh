@@ -28,7 +28,7 @@ const RegionsSection = () => (
           Intervention sur Toute la France
         </h2>
         <p className="text-muted-foreground">
-          Basés en Île-de-France, nous intervenons rapidement sur l'ensemble du territoire français grâce à notre réseau de techniciens qualifiés.
+          Présents à Paris et dans toutes les grandes villes, nous intervenons rapidement sur l'ensemble du territoire français grâce à notre réseau de techniciens qualifiés.
         </p>
       </motion.div>
 
@@ -49,7 +49,7 @@ const RegionsSection = () => (
             <div className="min-w-0">
               <div className="flex items-center gap-2">
                 <span className={`text-sm font-semibold ${r.highlight ? "text-service-blue" : "text-foreground"}`}>{r.name}</span>
-                {r.highlight && <span className="inline-flex px-1.5 py-0.5 rounded text-[10px] font-bold bg-service-blue text-white">SIÈGE</span>}
+                {r.highlight && <span className="inline-flex px-1.5 py-0.5 rounded text-[10px] font-bold bg-service-blue text-white">PRIORITAIRE</span>}
               </div>
               <div className="text-xs text-muted-foreground mt-0.5">{r.depts}</div>
             </div>

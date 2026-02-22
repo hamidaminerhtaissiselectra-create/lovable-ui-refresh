@@ -30,7 +30,7 @@ const HeroSection = () => {
           <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
             <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/10 text-accent text-sm font-semibold border border-accent/20 mb-8 backdrop-blur-sm">
               <Shield className="h-4 w-4" />
-              Expert en Volets Roulants depuis 10 ans en Île-de-France
+              Expert en Volets Roulants depuis 10 ans — Paris & toute la France
             </span>
           </motion.div>
 
@@ -43,7 +43,7 @@ const HeroSection = () => {
           </motion.h1>
 
           <motion.p initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.2 }} className="text-lg text-muted-foreground mb-8 max-w-lg">
-            Réparation, Installation, Motorisation et Vitrerie. Intervention rapide sur toute l'Île-de-France et au-delà. Devis gratuit en 24h.
+            Réparation, Installation, Motorisation et Vitrerie. Intervention rapide à Paris, en Île-de-France et dans toutes les grandes villes de France. Devis gratuit en 24h.
           </motion.p>
 
           <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.3 }} className="flex flex-wrap gap-4 mb-10">
