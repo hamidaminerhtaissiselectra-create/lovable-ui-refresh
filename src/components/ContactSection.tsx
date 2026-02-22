@@ -88,7 +88,7 @@ const ContactSection = () => {
 
           <motion.div initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="space-y-5">
             {[
-              { icon: Phone, title: "Téléphone", text: "01 64 07 XX XX", sub: "Lun - Ven : 8h - 18h" },
+              { icon: Phone, title: "Téléphone", text: "06 03 20 59 67", sub: "Lun - Ven : 8h - 18h" },
               { icon: Mail, title: "Email", text: "contact@reparaction-volets.fr", sub: "Réponse sous 24h" },
               { icon: MapPin, title: "Adresse", text: "62 Rue Emile Zola, 77610 Fontenay-Trésigny", sub: "Siège social" },
               { icon: Clock, title: "Horaires", text: "Lun - Ven : 8h00 - 18h00 | Sam : 9h00 - 13h00", sub: "Urgences 7j/7" },
