@@ -4,7 +4,7 @@ import { useRef } from "react";
 
 const points = [
   { icon: Award, text: "Plus de 10 ans d'expérience en volets roulants", color: "bg-service-blue/10 text-service-blue" },
-  { icon: Clock, text: "Intervention rapide sous 24-48h en Île-de-France", color: "bg-service-orange/10 text-service-orange" },
+  { icon: Clock, text: "Intervention rapide sous 24-48h — Paris & grandes villes", color: "bg-service-orange/10 text-service-orange" },
   { icon: ShieldCheck, text: "Artisan certifié RGE et Qualibat", color: "bg-service-emerald/10 text-service-emerald" },
   { icon: Hammer, text: "Garantie décennale sur toutes nos installations", color: "bg-service-violet/10 text-service-violet" },
   { icon: HeartHandshake, text: "Devis gratuit et transparent, sans engagement", color: "bg-service-cyan/10 text-service-cyan" },
@@ -37,7 +37,7 @@ const AboutSection = () => (
       <div className="grid lg:grid-cols-2 gap-12 items-center">
         <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
           <p className="text-muted-foreground mb-8 leading-relaxed">
-            Basée à Fontenay-Trésigny (77), notre entreprise s'appuie sur trois piliers fondamentaux : des <strong className="text-foreground">équipements de qualité</strong> issus des meilleures marques du marché, une <strong className="text-foreground">installation professionnelle</strong> réalisée par des artisans certifiés, et un <strong className="text-foreground">service après-vente réactif</strong> disponible 7 jours sur 7.
+            Présents à Paris et dans toutes les grandes villes de France, notre entreprise s'appuie sur trois piliers fondamentaux : des <strong className="text-foreground">équipements de qualité</strong> issus des meilleures marques du marché, une <strong className="text-foreground">installation professionnelle</strong> réalisée par des artisans certifiés, et un <strong className="text-foreground">service après-vente réactif</strong> disponible 7 jours sur 7.
           </p>
           <div className="grid sm:grid-cols-2 gap-4 mb-8">
             {points.map((p, i) => (

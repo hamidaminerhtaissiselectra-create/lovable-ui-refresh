@@ -88,7 +88,7 @@ const ServicesSection = () => (
           Nos Solutions de Volets & Vitrerie
         </h2>
         <p className="text-muted-foreground">
-          Protégez votre habitat avec des technologies de pointe et une expertise locale de plus de 10 ans.
+          Protégez votre habitat avec des technologies de pointe et plus de 10 ans d'expertise à Paris et partout en France.
         </p>
       </motion.div>
 

@@ -11,10 +11,10 @@ const regions = [
     name: "Île-de-France",
     slug: "ile-de-france",
     depts: ["Paris (75)", "Seine-et-Marne (77)", "Yvelines (78)", "Essonne (91)", "Hauts-de-Seine (92)", "Seine-Saint-Denis (93)", "Val-de-Marne (94)", "Val-d'Oise (95)"],
-    desc: "Notre siège est basé à Fontenay-Trésigny (77). L'Île-de-France est notre zone d'intervention principale avec des délais d'intervention parmi les plus rapides. Nous couvrons l'ensemble des 8 départements franciliens pour tous vos besoins en réparation, installation et motorisation de volets roulants.",
+    desc: "Paris et l'Île-de-France sont au cœur de notre activité. Nous couvrons Paris (tous les arrondissements) et l'ensemble des 8 départements franciliens pour tous vos besoins en réparation, installation et motorisation de volets roulants.",
     highlight: true,
     temoin: { name: "Marie L.", ville: "Fontenay-Trésigny (77)", texte: "Intervention rapide et efficace pour mon volet bloqué. Réparé en moins d'une heure !", note: 5 },
-    services: ["Intervention sous 24-48h", "Diagnostic gratuit sur place", "Stock de pièces détachées", "Urgences 7j/7"],
+    services: ["Intervention sous 24-48h", "Paris tous arrondissements", "Stock de pièces détachées", "Urgences 7j/7"],
   },
   {
     name: "Hauts-de-France",
@@ -172,7 +172,7 @@ const ZonesInterventionPage = () => {
         <div className="container mx-auto px-4">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center max-w-2xl mx-auto mb-14">
             <h2 className="font-display text-3xl font-bold text-foreground mb-4">Toutes Nos Zones d'Intervention par Région</h2>
-            <p className="text-muted-foreground">Cliquez sur une région pour découvrir les départements couverts, nos services et les témoignages de clients locaux.</p>
+            <p className="text-muted-foreground">Découvrez les départements couverts, nos services et les témoignages de clients dans chaque région.</p>
           </motion.div>
 
           <div className="space-y-8">
@@ -194,7 +194,7 @@ const ZonesInterventionPage = () => {
                       </div>
                       <div>
                         <h3 className="font-display font-bold text-foreground text-xl">{r.name}</h3>
-                        {r.highlight && <span className="text-xs font-bold text-accent">SIÈGE SOCIAL</span>}
+                        {r.highlight && <span className="text-xs font-bold text-accent">ZONE PRIORITAIRE</span>}
                       </div>
                     </div>
                     <p className="text-muted-foreground text-sm leading-relaxed mb-4">{r.desc}</p>
