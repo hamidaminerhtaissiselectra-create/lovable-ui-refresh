@@ -50,14 +50,6 @@
     --section-gradient: linear-gradient(180deg, hsl(210, 33%, 98%) 0%, hsl(210, 60%, 94%) 100%);
     --card-shadow: 0 4px 24px -4px hsl(213 72% 30% / 0.08);
     --card-shadow-hover: 0 12px 40px -8px hsl(213 72% 30% / 0.15);
-
-    /* Service icon colors */
-    --service-blue: 213 72% 50%;
-    --service-rose: 350 80% 55%;
-    --service-emerald: 160 70% 40%;
-    --service-violet: 260 65% 55%;
-    --service-cyan: 190 80% 45%;
-    --service-orange: 25 90% 55%;
   }
 
   .dark {
@@ -121,33 +113,4 @@
   .card-shadow-hover {
     box-shadow: var(--card-shadow-hover);
   }
-
-  /* Service Color Utilities */
-  .bg-service-blue\/10 { background-color: hsla(var(--service-blue), 0.1); }
-  .bg-service-rose\/10 { background-color: hsla(var(--service-rose), 0.1); }
-  .bg-service-emerald\/10 { background-color: hsla(var(--service-emerald), 0.1); }
-  .bg-service-violet\/10 { background-color: hsla(var(--service-violet), 0.1); }
-  .bg-service-cyan\/10 { background-color: hsla(var(--service-cyan), 0.1); }
-  .bg-service-orange\/10 { background-color: hsla(var(--service-orange), 0.1); }
-
-  .bg-service-blue\/20 { background-color: hsla(var(--service-blue), 0.2); }
-  .bg-service-rose\/20 { background-color: hsla(var(--service-rose), 0.2); }
-  .bg-service-emerald\/20 { background-color: hsla(var(--service-emerald), 0.2); }
-  .bg-service-violet\/20 { background-color: hsla(var(--service-violet), 0.2); }
-  .bg-service-cyan\/20 { background-color: hsla(var(--service-cyan), 0.2); }
-  .bg-service-orange\/20 { background-color: hsla(var(--service-orange), 0.2); }
-
-  .border-service-blue\/20 { border-color: hsla(var(--service-blue), 0.2); }
-  .border-service-rose\/20 { border-color: hsla(var(--service-rose), 0.2); }
-  .border-service-emerald\/20 { border-color: hsla(var(--service-emerald), 0.2); }
-  .border-service-violet\/20 { border-color: hsla(var(--service-violet), 0.2); }
-  .border-service-cyan\/20 { border-color: hsla(var(--service-cyan), 0.2); }
-  .border-service-orange\/20 { border-color: hsla(var(--service-orange), 0.2); }
-
-  .text-service-blue { color: hsl(var(--service-blue)); }
-  .text-service-rose { color: hsl(var(--service-rose)); }
-  .text-service-emerald { color: hsl(var(--service-emerald)); }
-  .text-service-violet { color: hsl(var(--service-violet)); }
-  .text-service-cyan { color: hsl(var(--service-cyan)); }
-  .text-service-orange { color: hsl(var(--service-orange)); }
 }
