@@ -43,7 +43,7 @@ const HeroSection = () => (
             <a href="#devis">Demander un Devis Gratuit <ArrowRight className="h-5 w-5" /></a>
           </Button>
           <Button size="lg" variant="outline" asChild className="border-primary/30 text-primary hover:bg-primary/5 text-base gap-2">
-            <a href="tel:0164070000"><Phone className="h-5 w-5" /> Intervention Urgente</a>
+            <a href="tel:0603205967"><Phone className="h-5 w-5" /> 06 03 20 59 67</a>
           </Button>
         </motion.div>
 

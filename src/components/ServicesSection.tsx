@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
-import { Wrench, RefreshCcw, LayoutGrid, Cpu, GlassWater, ArrowRight, Shield, Zap } from "lucide-react";
-import { Badge } from "@/components/ui/badge";
+import { Wrench, RefreshCcw, GlassWater, Cpu, LayoutGrid, Zap, ArrowRight, Shield } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const services = [
   {
@@ -10,6 +10,7 @@ const services = [
     badge: "Le + demandé",
     badgeColor: "bg-accent/10 text-accent border-accent/20",
     features: ["Diagnostic gratuit", "Pièces garanties 2 ans", "Toutes marques"],
+    link: "/services/reparation-volets-roulants",
   },
   {
     icon: RefreshCcw,
@@ -18,6 +19,7 @@ const services = [
     badge: "Sur-mesure",
     badgeColor: "bg-primary/10 text-primary border-primary/20",
     features: ["Fabrication sur-mesure", "Pose en 1 journée", "Garantie décennale"],
+    link: "/services/installation-remplacement-volets",
   },
   {
     icon: GlassWater,
@@ -26,6 +28,7 @@ const services = [
     badge: "Urgence 7j/7",
     badgeColor: "bg-destructive/10 text-destructive border-destructive/20",
     features: ["Bris de glace urgent", "Double & triple vitrage", "Vitrage sécurit"],
+    link: "/services/vitrerie-remplacement-vitrage",
   },
   {
     icon: Cpu,
@@ -34,6 +37,7 @@ const services = [
     badge: "Connecté",
     badgeColor: "bg-violet-500/10 text-violet-600 border-violet-500/20",
     features: ["Compatible domotique", "Contrôle smartphone", "Installation 1-2h/volet"],
+    link: "/services/motorisation-domotique",
   },
   {
     icon: LayoutGrid,
@@ -42,6 +46,7 @@ const services = [
     badge: "Clé en main",
     badgeColor: "bg-emerald-500/10 text-emerald-600 border-emerald-500/20",
     features: ["Étude personnalisée", "Pose certifiée", "SAV inclus"],
+    link: "/services/installation-remplacement-volets",
   },
   {
     icon: Zap,
@@ -50,6 +55,7 @@ const services = [
     badge: "Express",
     badgeColor: "bg-amber-500/10 text-amber-600 border-amber-500/20",
     features: ["Intervention le jour même", "Disponible 7j/7", "Devis sur place"],
+    link: "/services/depannage-express",
   },
 ];
 
@@ -96,9 +102,9 @@ const ServicesSection = () => (
                 </li>
               ))}
             </ul>
-            <a href="#devis" className="inline-flex items-center gap-1 text-accent text-sm font-semibold hover:gap-2 transition-all">
-              Demander un devis <ArrowRight className="h-4 w-4" />
-            </a>
+            <Link to={s.link} className="inline-flex items-center gap-1 text-accent text-sm font-semibold hover:gap-2 transition-all">
+              En savoir plus <ArrowRight className="h-4 w-4" />
+            </Link>
           </motion.div>
         ))}
       </div>
