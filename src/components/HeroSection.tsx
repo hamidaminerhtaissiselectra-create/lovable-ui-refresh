@@ -30,20 +30,16 @@ const HeroSection = () => {
           <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
             <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/10 text-accent text-sm font-semibold border border-accent/20 mb-8 backdrop-blur-sm">
               <Shield className="h-4 w-4" />
-              Expert en Volets Roulants depuis 10 ans — Paris & toute la France
+              Expert en Volets Roulants depuis 10 ans — Paris, Île-de-France & Partout en France
             </span>
           </motion.div>
 
           <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.1 }} className="font-display text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight mb-6 text-foreground">
-            Réparation, Installation & Motorisation de{" "}
-            <span className="text-gradient">Volets Roulants</span>
-            <br />
-            et{" "}
-            <span className="text-gradient">Vitrerie</span> à Paris & France
+            Réparation, Installation & Motorisation de <span className="text-gradient">Volets Roulants</span> et <span className="text-gradient">Vitrerie</span> à Paris, Île-de-France & Partout en France
           </motion.h1>
 
           <motion.p initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.2 }} className="text-lg text-muted-foreground mb-8 max-w-lg">
-            Réparation, installation, motorisation et vitrerie de volets roulants. Intervention rapide à Paris et dans toute la France. Devis gratuit en 24h, garantie décennale, artisans certifiés RGE.
+            Réparation, installation, motorisation et vitrerie de volets roulants. Intervention rapide à Paris, en Île-de-France et dans toute la France. Devis gratuit en 24h, garantie décennale, artisans certifiés RGE. Votre expert de confiance pour tous vos besoins en volets roulants.
           </motion.p>
 
           <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.3 }} className="flex flex-wrap gap-4 mb-10">

@@ -30,7 +30,7 @@ const DepannageExpressPage = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-   document.title = "Dépannage Express Volets Roulants à Paris & France Entière | Répar\"Action Volets";
+   document.title = "Dépannage Express Volets Roulants | Urgence 7j/7 Paris & Île-de-France | Répar\"Action Volets";
 
     // Schema.org Service
     const serviceSchema = {
@@ -54,7 +54,7 @@ const DepannageExpressPage = () => {
         "@type": "Country",
         "name": "France"
       },
-      "description": "Volet bloqué ? Moteur en panne ? Vitre cassée ? Notre service de dépannage express intervient dans les plus brefs délais pour rétablir la sécurité et le confort de votre habitat. Disponible 7j/7, diagnostic gratuit, pièces en stock.",
+      "description": "Dépannage express de volets roulants à Paris et en Île-de-France. Intervention rapide 7j/7 pour volet bloqué, moteur en panne, vitre cassée. Diagnostic gratuit, pièces en stock. Contactez Répar\"Action Volets pour une urgence !",
       "url": "https://reparaction-volets.fr/services/depannage-express",
       "hasOffer": {
         "@type": "Offer",

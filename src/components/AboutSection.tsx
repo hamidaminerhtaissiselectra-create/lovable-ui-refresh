@@ -27,10 +27,10 @@ const AboutSection = () => (
       <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center max-w-2xl mx-auto mb-14">
         <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-service-emerald/10 text-service-emerald text-sm font-semibold border border-service-emerald/20 mb-4">Notre Mission</span>
         <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mt-2 mb-4">
-          Qui Sommes-Nous ? Expert en Réparation de Volets depuis 10 ans
+          Qui Sommes-Nous ? Votre Expert en Réparation de Volets Roulants à Paris et en France depuis 10 ans
         </h2>
         <p className="text-muted-foreground leading-relaxed">
-          Depuis plus de 10 ans, Répar'Action Volets est votre spécialiste en réparation, installation et motorisation de volets roulants à Paris et partout en France. Notre mission : rendre votre habitat plus sécurisé, confortable et énergétiquement efficace.
+          Depuis plus de 10 ans, Répar'Action Volets est le spécialiste incontournable de la réparation, installation et motorisation de volets roulants à Paris, en Île-de-France et partout en France. Notre mission est de rendre votre habitat plus sécurisé, confortable et énergétiquement efficace grâce à des solutions durables et performantes.
         </p>
       </motion.div>
 

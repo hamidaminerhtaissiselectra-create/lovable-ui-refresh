@@ -15,6 +15,9 @@ import Blog from "./pages/Blog";
 import AboutUs from "./pages/AboutUs";
 import LegalNotice from "./pages/LegalNotice";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
+import MentionsLegales from "./pages/MentionsLegales";
+import PolitiqueConfidentialite from "./pages/PolitiqueConfidentialite";
+import CGV from "./pages/CGV";
 import FloatingCallButton from "./components/FloatingCallButton";
 
 const queryClient = new QueryClient();
@@ -35,8 +38,9 @@ const App = () => (
           <Route path="/zones-intervention" element={<ZonesIntervention />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/qui-sommes-nous" element={<AboutUs />} />
-          <Route path="/mentions-legales" element={<LegalNotice />} />
-          <Route path="/politique-confidentialite" element={<PrivacyPolicy />} />
+          <Route path="/mentions-legales" element={<MentionsLegales />} />
+          <Route path="/politique-confidentialite" element={<PolitiqueConfidentialite />} />
+          <Route path="/cgv" element={<CGV />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

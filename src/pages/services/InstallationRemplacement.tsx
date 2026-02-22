@@ -27,7 +27,7 @@ const InstallationRemplacementPage = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-   document.title = "Installation & Remplacement de Volets Roulants à Paris & France Entière | Répar\"Action Volets";
+   document.title = "Installation & Remplacement Volets Roulants | Paris & Île-de-France | Répar\"Action Volets";
 
     // Schema.org Service
     const serviceSchema = {
@@ -51,7 +51,7 @@ const InstallationRemplacementPage = () => {
         "@type": "Country",
         "name": "France"
       },
-      "description": "Transformez votre habitat avec des volets roulants neufs fabriqués sur-mesure. Aluminium, PVC ou bois — nous vous accompagnons du choix du matériau à la pose professionnelle, avec garantie décennale.",
+      "description": "Installation et remplacement de volets roulants sur-mesure à Paris et en Île-de-France. Aluminium, PVC, bois. Devis gratuit, garantie décennale, artisans RGE. Améliorez votre isolation et sécurité avec Répar\"Action Volets.",
       "url": "https://reparaction-volets.fr/services/installation-remplacement-volets",
       "hasOffer": {
         "@type": "Offer",

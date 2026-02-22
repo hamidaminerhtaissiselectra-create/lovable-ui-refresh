@@ -32,7 +32,7 @@ const VitreriePage = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-   document.title = "Vitrerie & Remplacement de Vitrage à Paris & France Entière | Répar\"Action Volets";
+   document.title = "Vitrerie & Remplacement de Vitrage | Urgence 7j/7 Paris & Île-de-France | Répar\"Action Volets";
 
     // Schema.org Service
     const serviceSchema = {
@@ -56,7 +56,7 @@ const VitreriePage = () => {
         "@type": "Country",
         "name": "France"
       },
-      "description": "Bris de glace, vitrage cassé ou remplacement programmé ? Nos vitriers professionnels interviennent en urgence 7 jours sur 7 pour sécuriser votre habitation. Simple, double ou triple vitrage — nous traitons toutes les situations avec réactivité et expertise.",
+      "description": "Vitrier d\"urgence à Paris et en Île-de-France. Remplacement de vitrage cassé, simple, double ou triple vitrage. Intervention rapide 7j/7 pour sécuriser votre domicile. Devis gratuit. Contactez Répar\"Action Volets.",
       "url": "https://reparaction-volets.fr/services/vitrerie-remplacement-vitrage",
       "hasOffer": {
         "@type": "Offer",

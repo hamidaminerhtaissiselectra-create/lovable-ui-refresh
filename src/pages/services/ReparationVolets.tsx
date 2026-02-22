@@ -33,8 +33,7 @@ const ReparationVoletsPage = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-   document.title = "Réparation de Volets Roulants à Paris & France Entière | Répar\'Action Volets";
-
+   document.title = "Réparation de Volets Roulants | Dépannage Express Paris & Île-de-France | Répar\'Action Volets";
     // Schema.org Service
     const serviceSchema = {
       "@context": "https://schema.org",
@@ -57,7 +56,7 @@ const ReparationVoletsPage = () => {
         "@type": "Country",
         "name": "France"
       },
-      "description": "Votre volet roulant est bloqué, fait du bruit ou ne répond plus ? Nos techniciens certifiés interviennent rapidement sur tous types de volets roulants — manuels, électriques et solaires — pour un dépannage efficace et garanti. Diagnostic gratuit, devis transparent, intervention sous 48h.",
+      "description": "Expert en réparation de volets roulants à Paris et en Île-de-France. Intervention rapide sous 48h pour volets bloqués, moteurs HS, sangles cassées. Diagnostic gratuit, devis transparent, garantie 2 ans. Contactez Répar\'Action Volets pour un dépannage express !",
       "url": "https://reparaction-volets.fr/services/reparation-volets-roulants",
       "hasOffer": {
         "@type": "Offer",

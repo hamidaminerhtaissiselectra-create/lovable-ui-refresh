@@ -8,8 +8,7 @@ export default defineConfig(({ mode }) => ({
   server: {
     host: "0.0.0.0",
     port: 5173,
-    strictPort: true,
-    allowedHosts: true, // Utilisation du booléen true pour autoriser explicitement TOUS les hôtes
+    allowedHosts: ["all", ".manus.computer"],
     hmr: {
       overlay: false,
     },

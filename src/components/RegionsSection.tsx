@@ -25,10 +25,10 @@ const RegionsSection = () => (
           <MapPin className="h-3.5 w-3.5" /> Zones d'intervention
         </span>
         <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mt-2 mb-4">
-          Zones d'Intervention - Réparation de Volets à Paris & Toute la France
+          Nos Zones d'Intervention : Réparation de Volets Roulants à Paris, Île-de-France & Partout en France
         </h2>
         <p className="text-muted-foreground">
-          Présents à Paris (tous les arrondissements) et dans toutes les grandes villes de France, nous intervenons rapidement sur l'ensemble du territoire grâce à notre réseau de techniciens certifiés RGE et Qualibat.
+          Répar'Action Volets couvre l'ensemble du territoire français, avec une présence renforcée à Paris et en Île-de-France. Nos techniciens certifiés RGE et Qualibat interviennent rapidement dans toutes les régions pour la réparation, l'installation et la motorisation de vos volets roulants.
         </p>
       </motion.div>
 

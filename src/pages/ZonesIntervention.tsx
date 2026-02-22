@@ -111,7 +111,7 @@ const regions = [
 const ZonesInterventionPage = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
-    document.title = "Zones d'Intervention | Volets Roulants dans Toute la France | Répar'Action Volets";
+  document.title = "Zones d\'Intervention | Réparation Volets Roulants par Région | Répar\'Action Volets";
   }, []);
 
   return (
@@ -131,11 +131,10 @@ const ZonesInterventionPage = () => {
               <MapPin className="h-3.5 w-3.5" /> France métropolitaine
             </span>
             <h1 className="font-display text-4xl md:text-5xl font-extrabold leading-tight mb-6">
-              Réparation de Volets Roulants dans Toute la France
+              Nos Zones d\'Intervention : Réparation de Volets Roulants par Région en France
             </h1>
             <p className="text-lg text-primary-foreground/80 mb-8 leading-relaxed">
-              Basés à Fontenay-Trésigny en Seine-et-Marne (77), nous intervenons sur l'ensemble du territoire français grâce à notre réseau de techniciens qualifiés. Découvrez nos zones d'intervention et contactez-nous pour un devis gratuit dans votre région.
-            </p>
+             Répar\'Action Volets intervient sur l\'ensemble du territoire français, avec une expertise reconnue à Paris et en Île-de-France. Découvrez nos zones d\'intervention détaillées par région et contactez-nous pour un devis gratuit et personnalisé.            </p>
             <div className="flex flex-wrap gap-4">
               <Button size="lg" asChild className="bg-accent text-accent-foreground hover:bg-accent/90 gap-2 shadow-lg">
                 <Link to="/#devis">Devis Gratuit <ArrowRight className="h-5 w-5" /></Link>
@@ -171,7 +170,7 @@ const ZonesInterventionPage = () => {
       <section className="py-16">
         <div className="container mx-auto px-4">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center max-w-2xl mx-auto mb-14">
-            <h2 className="font-display text-3xl font-bold text-foreground mb-4">Toutes Nos Zones d'Intervention par Région</h2>
+            <h2 className="font-display text-3xl font-bold text-foreground mb-4">Nos Zones d'Intervention par Région en France Métropolitaine</h2>
             <p className="text-muted-foreground">Découvrez les départements couverts, nos services et les témoignages de clients dans chaque région.</p>
           </motion.div>
 

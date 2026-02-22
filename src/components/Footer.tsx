@@ -69,11 +69,11 @@ const Footer = () => (
       </div>
 
       <div className="border-t border-primary-foreground/20 pt-6 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-primary-foreground/50">
-        <p>© {new Date().getFullYear()} Répar'Action Volets. Tous droits réservés.</p>
+        <p>© 2026 Répar'Action Volets. Tous droits réservés.</p>
         <div className="flex gap-4">
-          <a href="#" className="hover:text-primary-foreground transition-colors">Mentions légales</a>
-          <a href="#" className="hover:text-primary-foreground transition-colors">Politique de confidentialité</a>
-          <a href="#" className="hover:text-primary-foreground transition-colors">CGV</a>
+          <Link to="/mentions-legales" className="hover:text-primary-foreground transition-colors">Mentions légales</Link>
+          <Link to="/politique-confidentialite" className="hover:text-primary-foreground transition-colors">Politique de confidentialité</Link>
+          <Link to="/cgv" className="hover:text-primary-foreground transition-colors">CGV</Link>
         </div>
       </div>
     </div>

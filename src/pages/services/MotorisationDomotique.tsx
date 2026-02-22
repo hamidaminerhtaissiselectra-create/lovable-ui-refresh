@@ -28,7 +28,7 @@ const MotorisationDomotiquePage = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-   document.title = "Motorisation & Domotique de Volets Roulants à Paris & France Entière | Répar\"Action Volets";
+   document.title = "Motorisation & Domotique Volets Roulants | Paris & Île-de-France | Répar\"Action Volets";
 
     // Schema.org Service
     const serviceSchema = {
@@ -52,7 +52,7 @@ const MotorisationDomotiquePage = () => {
         "@type": "Country",
         "name": "France"
       },
-      "description": "Transformez vos volets manuels en volets motorisés et connectés. Contrôle à distance, programmation horaire, scénarios automatisés — découvrez le confort de la maison intelligente avec nos solutions compatibles Somfy, Google Home et Alexa.",
+      "description": "Motorisation et domotique de volets roulants à Paris et en Île-de-France. Contrôle à distance, programmation, scénarios automatisés. Solutions compatibles Somfy, Google Home, Alexa. Devis gratuit. Répar\"Action Volets.",
       "url": "https://reparaction-volets.fr/services/motorisation-domotique",
       "hasOffer": {
         "@type": "Offer",
