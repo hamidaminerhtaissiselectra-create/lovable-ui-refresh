@@ -21,7 +21,7 @@ const HeroSection = () => {
     <section ref={ref} id="accueil" className="relative min-h-screen flex items-center overflow-hidden">
       {/* Parallax background image */}
       <motion.div className="absolute inset-0" style={{ y: bgY }}>
-        <img src={heroImg} alt="Volets roulants modernes sur une maison française" className="w-full h-full object-cover scale-110" />
+        <img src={heroImg} alt="Volets roulants modernes sur une maison française" className="w-full h-[120%] object-cover" />
         <div className="absolute inset-0 bg-gradient-to-r from-white/95 via-white/80 to-white/30" />
       </motion.div>
 

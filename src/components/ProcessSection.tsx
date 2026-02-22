@@ -33,7 +33,7 @@ const ProcessSection = () => (
             className={`relative bg-card rounded-xl p-6 card-shadow border ${s.borderColor} hover:card-shadow-hover transition-all group`}
           >
             <div className="flex items-center gap-4 mb-4">
-              <span className="text-3xl font-display font-extrabold text-muted/80 group-hover:text-muted-foreground/30 transition-colors">{s.num}</span>
+              <span className="text-3xl font-display font-extrabold text-border group-hover:text-muted-foreground/30 transition-colors">{s.num}</span>
               <div className={`w-10 h-10 rounded-lg ${s.color} flex items-center justify-center shadow-md`}>
                 <s.icon className="h-5 w-5 text-white" />
               </div>

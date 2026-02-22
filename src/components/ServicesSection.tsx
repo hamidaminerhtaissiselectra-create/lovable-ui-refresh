@@ -112,8 +112,8 @@ const ServicesSection = () => (
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
               {/* Floating icon badge */}
-              <div className={`absolute bottom-0 left-5 translate-y-1/2 w-12 h-12 rounded-xl ${s.iconBg} flex items-center justify-center shadow-lg border-2 border-card z-10`}>
-                <s.icon className="h-5 w-5 text-white" />
+              <div className={`absolute bottom-0 left-5 translate-y-1/2 w-12 h-12 rounded-xl ${s.iconBg} flex items-center justify-center shadow-lg border-[3px] border-card z-10`}>
+                <s.icon className="h-5 w-5 text-white" strokeWidth={2.5} />
               </div>
               {/* Badge top right */}
               <span className="absolute top-3 right-3 px-2.5 py-1 rounded-full text-[11px] font-bold bg-card/90 backdrop-blur-sm text-foreground shadow-sm">
