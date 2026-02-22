@@ -1,6 +1,6 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
-import { Wrench, RefreshCcw, GlassWater, Cpu, LayoutGrid, AlertTriangle, ArrowRight, ArrowLeft, CheckCircle2, User, ClipboardList, Settings, HelpCircle } from "lucide-react";
+import { Wrench, RefreshCcw, GlassWater, Cpu, LayoutGrid, AlertTriangle, ArrowRight, ArrowLeft, CheckCircle2, HelpCircle, Settings } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -10,27 +10,27 @@ type FormMode = "devis" | "intervention";
 
 const servicesByMode: Record<FormMode, { id: string; icon: React.ElementType; label: string; iconBg: string; borderColor: string }[]> = {
   devis: [
-    { id: "reparation", icon: Wrench, label: "Réparation de volets", iconBg: "bg-blue-500", borderColor: "border-blue-300" },
-    { id: "remplacement", icon: RefreshCcw, label: "Remplacement de volets", iconBg: "bg-rose-500", borderColor: "border-rose-300" },
-    { id: "vitrerie", icon: GlassWater, label: "Vitrerie & Vitrage", iconBg: "bg-emerald-500", borderColor: "border-emerald-300" },
-    { id: "motorisation", icon: Cpu, label: "Motorisation & Domotique", iconBg: "bg-violet-500", borderColor: "border-violet-300" },
-    { id: "installation", icon: LayoutGrid, label: "Installation complète", iconBg: "bg-cyan-500", borderColor: "border-cyan-300" },
-    { id: "autre", icon: HelpCircle, label: "Autre demande", iconBg: "bg-gray-500", borderColor: "border-gray-300" },
+    { id: "reparation", icon: Wrench, label: "Réparation de volets", iconBg: "bg-service-blue", borderColor: "border-service-blue/40" },
+    { id: "remplacement", icon: RefreshCcw, label: "Remplacement de volets", iconBg: "bg-service-rose", borderColor: "border-service-rose/40" },
+    { id: "vitrerie", icon: GlassWater, label: "Vitrerie & Vitrage", iconBg: "bg-service-emerald", borderColor: "border-service-emerald/40" },
+    { id: "motorisation", icon: Cpu, label: "Motorisation & Domotique", iconBg: "bg-service-violet", borderColor: "border-service-violet/40" },
+    { id: "installation", icon: LayoutGrid, label: "Installation complète", iconBg: "bg-service-cyan", borderColor: "border-service-cyan/40" },
+    { id: "autre", icon: HelpCircle, label: "Autre demande", iconBg: "bg-muted-foreground/60", borderColor: "border-muted-foreground/30" },
   ],
   intervention: [
-    { id: "panne-volet", icon: Wrench, label: "Volet bloqué / en panne", iconBg: "bg-blue-500", borderColor: "border-blue-300" },
-    { id: "vitre-cassee", icon: GlassWater, label: "Vitre cassée", iconBg: "bg-rose-500", borderColor: "border-rose-300" },
-    { id: "urgence", icon: AlertTriangle, label: "Dépannage urgent", iconBg: "bg-orange-500", borderColor: "border-orange-300" },
-    { id: "motorisation-hs", icon: Cpu, label: "Motorisation HS", iconBg: "bg-violet-500", borderColor: "border-violet-300" },
-    { id: "maintenance", icon: Settings, label: "Maintenance / Entretien", iconBg: "bg-emerald-500", borderColor: "border-emerald-300" },
-    { id: "autre-intervention", icon: HelpCircle, label: "Autre intervention", iconBg: "bg-gray-500", borderColor: "border-gray-300" },
+    { id: "panne-volet", icon: Wrench, label: "Volet bloqué / en panne", iconBg: "bg-service-blue", borderColor: "border-service-blue/40" },
+    { id: "vitre-cassee", icon: GlassWater, label: "Vitre cassée", iconBg: "bg-service-rose", borderColor: "border-service-rose/40" },
+    { id: "urgence", icon: AlertTriangle, label: "Dépannage urgent", iconBg: "bg-service-orange", borderColor: "border-service-orange/40" },
+    { id: "motorisation-hs", icon: Cpu, label: "Motorisation HS", iconBg: "bg-service-violet", borderColor: "border-service-violet/40" },
+    { id: "maintenance", icon: Settings, label: "Maintenance / Entretien", iconBg: "bg-service-emerald", borderColor: "border-service-emerald/40" },
+    { id: "autre-intervention", icon: HelpCircle, label: "Autre intervention", iconBg: "bg-muted-foreground/60", borderColor: "border-muted-foreground/30" },
   ],
 };
 
 const urgencyOptions = [
-  { id: "normal", label: "Sous 1 semaine", desc: "Planification classique", color: "border-emerald-300 text-emerald-600" },
-  { id: "rapide", label: "Sous 48h", desc: "Intervention rapide", color: "border-orange-300 text-orange-600" },
-  { id: "urgent", label: "Aujourd'hui / Demain", desc: "Urgence immédiate", color: "border-rose-300 text-rose-600" },
+  { id: "normal", label: "Sous 1 semaine", desc: "Planification classique", borderColor: "border-service-emerald", textColor: "text-service-emerald" },
+  { id: "rapide", label: "Sous 48h", desc: "Intervention rapide", borderColor: "border-service-orange", textColor: "text-service-orange" },
+  { id: "urgent", label: "Aujourd'hui / Demain", desc: "Urgence immédiate", borderColor: "border-service-rose", textColor: "text-service-rose" },
 ];
 
 const QuoteFormSection = () => {
@@ -46,22 +46,8 @@ const QuoteFormSection = () => {
   const [city, setCity] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const resetForm = () => {
-    setStep(1);
-    setSelectedService("");
-    setUrgency("");
-    setDetails("");
-    setName("");
-    setPhone("");
-    setEmail("");
-    setCity("");
-  };
-
-  const switchMode = (m: FormMode) => {
-    setMode(m);
-    resetForm();
-  };
-
+  const resetForm = () => { setStep(1); setSelectedService(""); setUrgency(""); setDetails(""); setName(""); setPhone(""); setEmail(""); setCity(""); };
+  const switchMode = (m: FormMode) => { setMode(m); resetForm(); };
   const canNext = () => {
     if (step === 1) return selectedService !== "";
     if (step === 2) return urgency !== "";
@@ -99,8 +85,8 @@ const QuoteFormSection = () => {
         </motion.div>
 
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="max-w-3xl mx-auto">
-          {/* Top blue accent bar */}
-          <div className="h-1.5 bg-gradient-to-r from-blue-500 via-accent to-blue-400 rounded-t-2xl" />
+          {/* Top accent bar */}
+          <div className="h-1.5 bg-gradient-to-r from-service-blue via-accent to-service-orange rounded-t-2xl" />
 
           <div className="bg-card rounded-b-2xl shadow-2xl border border-border/50 overflow-hidden">
             {/* Mode tabs */}
@@ -132,15 +118,11 @@ const QuoteFormSection = () => {
               {[1, 2, 3].map((s, i) => (
                 <div key={s} className="flex items-center">
                   <div className={`w-9 h-9 rounded-full flex items-center justify-center text-sm font-bold transition-all ${
-                    step >= s
-                      ? "bg-accent text-white shadow-md shadow-accent/30"
-                      : "bg-muted text-muted-foreground"
+                    step >= s ? "bg-accent text-white shadow-md shadow-accent/30" : "bg-muted text-muted-foreground"
                   }`}>
                     {step > s ? <CheckCircle2 className="h-5 w-5" /> : s}
                   </div>
-                  {i < 2 && (
-                    <div className={`w-16 h-0.5 mx-1 transition-all ${step > s ? "bg-accent" : "bg-border"}`} />
-                  )}
+                  {i < 2 && <div className={`w-16 h-0.5 mx-1 transition-all ${step > s ? "bg-accent" : "bg-border"}`} />}
                 </div>
               ))}
             </div>
@@ -163,13 +145,13 @@ const QuoteFormSection = () => {
                             onClick={() => setSelectedService(s.id)}
                             className={`group flex flex-col items-center gap-3 p-5 rounded-xl border-2 transition-all duration-200 hover:shadow-md ${
                               selected
-                                ? `${s.borderColor} bg-white shadow-md scale-[1.02]`
+                                ? `${s.borderColor} bg-card shadow-md scale-[1.02]`
                                 : "border-border/60 bg-background hover:border-muted-foreground/30"
                             }`}
                           >
-                            <div className={`w-12 h-12 rounded-xl flex items-center justify-center text-white transition-all ${
-                              selected ? s.iconBg : "bg-muted-foreground/20 group-hover:" + s.iconBg
-                            }`}>
+                            <div className={`w-12 h-12 rounded-xl flex items-center justify-center text-white transition-all shadow-md ${
+                              selected ? s.iconBg : "bg-muted-foreground/20"
+                            } group-hover:${s.iconBg}`}>
                               <s.icon className="h-6 w-6" />
                             </div>
                             <span className={`text-sm font-medium text-center leading-tight ${selected ? "text-foreground" : "text-muted-foreground"}`}>
@@ -188,7 +170,6 @@ const QuoteFormSection = () => {
                     <p className="text-sm text-muted-foreground mb-6">
                       {mode === "devis" ? "Quand souhaitez-vous réaliser ce projet ?" : "Quelle est l'urgence de l'intervention ?"}
                     </p>
-
                     <div className="grid grid-cols-3 gap-3 mb-6">
                       {urgencyOptions.map((o) => {
                         const selected = urgency === o.id;
@@ -197,7 +178,7 @@ const QuoteFormSection = () => {
                             key={o.id}
                             onClick={() => setUrgency(o.id)}
                             className={`p-4 rounded-xl border-2 text-center transition-all ${
-                              selected ? `${o.color} border-current bg-white shadow-md` : "border-border hover:border-muted-foreground/30"
+                              selected ? `${o.borderColor} ${o.textColor} bg-card shadow-md` : "border-border hover:border-muted-foreground/30"
                             }`}
                           >
                             <div className={`text-sm font-bold ${selected ? "" : "text-foreground"}`}>{o.label}</div>
@@ -206,7 +187,6 @@ const QuoteFormSection = () => {
                         );
                       })}
                     </div>
-
                     <div>
                       <label className="block text-sm font-medium text-foreground mb-1.5">Description (optionnel)</label>
                       <Textarea value={details} onChange={(e) => setDetails(e.target.value)} placeholder="Décrivez votre situation : type de volet, panne constatée, dimensions..." rows={3} className="bg-background border-border" />
@@ -218,7 +198,6 @@ const QuoteFormSection = () => {
                   <motion.div key="step3" initial={{ opacity: 0, x: 30 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -30 }} transition={{ duration: 0.25 }}>
                     <h3 className="font-display font-bold text-lg text-foreground mb-1">Vos coordonnées</h3>
                     <p className="text-sm text-muted-foreground mb-6">Pour vous recontacter avec votre {mode === "devis" ? "devis" : "proposition d'intervention"}.</p>
-
                     <div className="space-y-4">
                       <div className="grid sm:grid-cols-2 gap-4">
                         <div>
@@ -241,11 +220,10 @@ const QuoteFormSection = () => {
                         </div>
                       </div>
                     </div>
-
                     <div className="mt-6 flex flex-wrap items-center gap-3 text-xs text-muted-foreground">
-                      <span className="inline-flex items-center gap-1"><CheckCircle2 className="h-3.5 w-3.5 text-emerald-500" /> Sans engagement</span>
-                      <span className="inline-flex items-center gap-1"><CheckCircle2 className="h-3.5 w-3.5 text-emerald-500" /> Réponse sous 24h</span>
-                      <span className="inline-flex items-center gap-1"><CheckCircle2 className="h-3.5 w-3.5 text-emerald-500" /> Données sécurisées</span>
+                      <span className="inline-flex items-center gap-1"><CheckCircle2 className="h-3.5 w-3.5 text-service-emerald" /> Sans engagement</span>
+                      <span className="inline-flex items-center gap-1"><CheckCircle2 className="h-3.5 w-3.5 text-service-emerald" /> Réponse sous 24h</span>
+                      <span className="inline-flex items-center gap-1"><CheckCircle2 className="h-3.5 w-3.5 text-service-emerald" /> Données sécurisées</span>
                     </div>
                   </motion.div>
                 )}
@@ -257,9 +235,7 @@ const QuoteFormSection = () => {
                   <Button variant="ghost" onClick={() => setStep(step - 1)} className="gap-2 text-muted-foreground">
                     <ArrowLeft className="h-4 w-4" /> Retour
                   </Button>
-                ) : (
-                  <div />
-                )}
+                ) : <div />}
                 {step < 3 ? (
                   <Button onClick={() => setStep(step + 1)} disabled={!canNext()} className="bg-accent text-white hover:bg-accent/90 gap-2 px-8 rounded-full shadow-lg shadow-accent/20">
                     Continuer <ArrowRight className="h-4 w-4" />

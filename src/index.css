@@ -50,6 +50,14 @@
     --section-gradient: linear-gradient(180deg, hsl(210, 33%, 98%) 0%, hsl(210, 60%, 94%) 100%);
     --card-shadow: 0 4px 24px -4px hsl(213 72% 30% / 0.08);
     --card-shadow-hover: 0 12px 40px -8px hsl(213 72% 30% / 0.15);
+
+    /* Service icon colors */
+    --service-blue: 213 72% 50%;
+    --service-rose: 350 80% 55%;
+    --service-emerald: 160 70% 40%;
+    --service-violet: 260 65% 55%;
+    --service-cyan: 190 80% 45%;
+    --service-orange: 25 90% 55%;
   }
 
   .dark {

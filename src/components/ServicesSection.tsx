@@ -1,60 +1,78 @@
 import { motion } from "framer-motion";
 import { Wrench, RefreshCcw, GlassWater, Cpu, LayoutGrid, Zap, ArrowRight, Shield } from "lucide-react";
 import { Link } from "react-router-dom";
+import imgReparation from "@/assets/service-reparation.jpg";
+import imgInstallation from "@/assets/service-installation.jpg";
+import imgVitrerie from "@/assets/service-vitrerie.jpg";
+import imgMotorisation from "@/assets/service-motorisation.jpg";
+import imgComplete from "@/assets/service-installation-complete.jpg";
+import imgDepannage from "@/assets/service-depannage.jpg";
 
 const services = [
   {
     icon: Wrench,
     title: "Réparation de Volets Roulants",
-    desc: "Diagnostic et réparation de tous types de volets roulants : manuels, électriques, solaires. Intervention rapide sur tous mécanismes, lames cassées, moteurs défaillants, sangles usées ou tabliers endommagés.",
+    desc: "Diagnostic et réparation de tous types de volets roulants : manuels, électriques, solaires. Intervention rapide sur tous mécanismes.",
     badge: "Le + demandé",
-    badgeColor: "bg-accent/10 text-accent border-accent/20",
-    features: ["Diagnostic gratuit", "Pièces garanties 2 ans", "Toutes marques"],
+    iconBg: "bg-service-blue",
+    iconBorder: "border-service-blue/30",
+    cardBorder: "hover:border-service-blue/40",
+    image: imgReparation,
     link: "/services/reparation-volets-roulants",
   },
   {
     icon: RefreshCcw,
     title: "Remplacement de Volets",
-    desc: "Installation de volets roulants neufs en aluminium, PVC ou bois. Large choix de coloris, de modèles et de systèmes d'ouverture adaptés à votre habitat et à vos exigences d'isolation.",
+    desc: "Installation de volets roulants neufs en aluminium, PVC ou bois. Large choix de coloris et de modèles sur-mesure.",
     badge: "Sur-mesure",
-    badgeColor: "bg-primary/10 text-primary border-primary/20",
-    features: ["Fabrication sur-mesure", "Pose en 1 journée", "Garantie décennale"],
+    iconBg: "bg-service-rose",
+    iconBorder: "border-service-rose/30",
+    cardBorder: "hover:border-service-rose/40",
+    image: imgInstallation,
     link: "/services/installation-remplacement-volets",
   },
   {
     icon: GlassWater,
-    title: "Vitrerie & Remplacement de Vitrage",
-    desc: "Remplacement de vitrage simple, double ou triple. Intervention d'urgence pour bris de glace 7j/7. Vitrage anti-effraction, acoustique et thermique pour un confort optimal.",
+    title: "Vitrerie & Vitrage",
+    desc: "Remplacement de vitrage simple, double ou triple. Intervention d'urgence pour bris de glace 7j/7.",
     badge: "Urgence 7j/7",
-    badgeColor: "bg-destructive/10 text-destructive border-destructive/20",
-    features: ["Bris de glace urgent", "Double & triple vitrage", "Vitrage sécurit"],
+    iconBg: "bg-service-emerald",
+    iconBorder: "border-service-emerald/30",
+    cardBorder: "hover:border-service-emerald/40",
+    image: imgVitrerie,
     link: "/services/vitrerie-remplacement-vitrage",
   },
   {
     icon: Cpu,
     title: "Motorisation & Domotique",
-    desc: "Motorisation de vos volets existants et intégration domotique pour un contrôle à distance via smartphone. Compatible Somfy, Google Home, Alexa et systèmes connectés.",
+    desc: "Motorisation de vos volets et intégration domotique. Compatible Somfy, Google Home, Alexa.",
     badge: "Connecté",
-    badgeColor: "bg-violet-500/10 text-violet-600 border-violet-500/20",
-    features: ["Compatible domotique", "Contrôle smartphone", "Installation 1-2h/volet"],
+    iconBg: "bg-service-violet",
+    iconBorder: "border-service-violet/30",
+    cardBorder: "hover:border-service-violet/40",
+    image: imgMotorisation,
     link: "/services/motorisation-domotique",
   },
   {
     icon: LayoutGrid,
     title: "Installation Complète",
-    desc: "Prise de mesures, fabrication sur-mesure et pose professionnelle de volets roulants neufs pour construction neuve ou rénovation. Accompagnement complet de A à Z.",
+    desc: "Prise de mesures, fabrication sur-mesure et pose professionnelle. Accompagnement complet de A à Z.",
     badge: "Clé en main",
-    badgeColor: "bg-emerald-500/10 text-emerald-600 border-emerald-500/20",
-    features: ["Étude personnalisée", "Pose certifiée", "SAV inclus"],
+    iconBg: "bg-service-cyan",
+    iconBorder: "border-service-cyan/30",
+    cardBorder: "hover:border-service-cyan/40",
+    image: imgComplete,
     link: "/services/installation-remplacement-volets",
   },
   {
     icon: Zap,
     title: "Dépannage Express",
-    desc: "Service de dépannage rapide pour volets bloqués, moteurs en panne ou situations d'urgence. Intervention possible le jour même en Île-de-France pour votre sécurité.",
+    desc: "Service de dépannage rapide pour volets bloqués ou moteurs en panne. Intervention le jour même.",
     badge: "Express",
-    badgeColor: "bg-amber-500/10 text-amber-600 border-amber-500/20",
-    features: ["Intervention le jour même", "Disponible 7j/7", "Devis sur place"],
+    iconBg: "bg-service-orange",
+    iconBorder: "border-service-orange/30",
+    cardBorder: "hover:border-service-orange/40",
+    image: imgDepannage,
     link: "/services/depannage-express",
   },
 ];
@@ -82,29 +100,35 @@ const ServicesSection = () => (
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: i * 0.08 }}
-            className="group bg-card rounded-xl p-6 card-shadow hover:card-shadow-hover transition-all duration-300 border border-border hover:border-accent/30"
+            className={`group bg-card rounded-2xl overflow-hidden card-shadow hover:card-shadow-hover transition-all duration-300 border border-border ${s.cardBorder}`}
           >
-            <div className="flex items-start justify-between mb-4">
-              <div className="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center group-hover:bg-accent/20 transition-colors">
-                <s.icon className="h-6 w-6 text-accent" />
+            {/* Image with icon badge overlay */}
+            <div className="relative h-48 overflow-hidden">
+              <img
+                src={s.image}
+                alt={s.title}
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                loading="lazy"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
+              {/* Floating icon badge */}
+              <div className={`absolute bottom-0 left-5 translate-y-1/2 w-12 h-12 rounded-xl ${s.iconBg} flex items-center justify-center shadow-lg border-2 border-card z-10`}>
+                <s.icon className="h-5 w-5 text-white" />
               </div>
-              <span className={`inline-flex px-2.5 py-1 rounded-full text-xs font-semibold border ${s.badgeColor}`}>
+              {/* Badge top right */}
+              <span className="absolute top-3 right-3 px-2.5 py-1 rounded-full text-[11px] font-bold bg-card/90 backdrop-blur-sm text-foreground shadow-sm">
                 {s.badge}
               </span>
             </div>
-            <h3 className="font-display font-bold text-lg text-foreground mb-2">{s.title}</h3>
-            <p className="text-muted-foreground text-sm leading-relaxed mb-4">{s.desc}</p>
-            <ul className="space-y-1.5 mb-5">
-              {s.features.map((f) => (
-                <li key={f} className="flex items-center gap-2 text-xs text-muted-foreground">
-                  <div className="w-1.5 h-1.5 rounded-full bg-accent" />
-                  {f}
-                </li>
-              ))}
-            </ul>
-            <Link to={s.link} className="inline-flex items-center gap-1 text-accent text-sm font-semibold hover:gap-2 transition-all">
-              En savoir plus <ArrowRight className="h-4 w-4" />
-            </Link>
+
+            {/* Content */}
+            <div className="p-6 pt-8">
+              <h3 className="font-display font-bold text-lg text-foreground mb-2">{s.title}</h3>
+              <p className="text-muted-foreground text-sm leading-relaxed mb-4">{s.desc}</p>
+              <Link to={s.link} className="inline-flex items-center gap-1 text-accent text-sm font-semibold hover:gap-2 transition-all group-hover:text-accent">
+                Découvrir <ArrowRight className="h-4 w-4" />
+              </Link>
+            </div>
           </motion.div>
         ))}
       </div>

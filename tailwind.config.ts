@@ -61,6 +61,12 @@ export default {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
+        "service-blue": "hsl(var(--service-blue))",
+        "service-rose": "hsl(var(--service-rose))",
+        "service-emerald": "hsl(var(--service-emerald))",
+        "service-violet": "hsl(var(--service-violet))",
+        "service-cyan": "hsl(var(--service-cyan))",
+        "service-orange": "hsl(var(--service-orange))",
       },
       borderRadius: {
         lg: "var(--radius)",
